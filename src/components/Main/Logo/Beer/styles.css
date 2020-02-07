@@ -1,0 +1,10 @@
+.beerSvg {
+  width: 130px;
+  margin-right: 0.8em;
+}
+
+@media screen and (max-width: 500px) {
+  .beerSvg {
+    width: 100px;
+  }
+}
