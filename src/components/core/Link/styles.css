@@ -1,0 +1,34 @@
+.link {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+  text-transform: uppercase;
+  color: #f29b3b;
+  font-weight: bold;
+  position: relative;
+  font-size: 0.85em;
+  transition: color 0.35s ease-out;
+}
+
+.link:hover {
+  color: #313131;
+}
+
+.link:after {
+  content: "";
+  height: 1px;
+  width: 100%;
+  background: #f29b3b;
+  position: absolute;
+  left: 0;
+  top: 15px;
+  z-index: 1;
+  transition: all 0.35s ease-out;
+}
+
+.link:hover::after {
+  width: 0;
+  background: #313131;
+}

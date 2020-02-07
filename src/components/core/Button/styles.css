@@ -1,0 +1,17 @@
+.button {
+  background: #f29b3b;
+  border: none;
+  outline: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  text-transform: uppercase;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 1em;
+  transition: background 0.35s ease-out;
+  letter-spacing: 0.5px;
+}
+
+.button:hover {
+  background: #313131;
+}
