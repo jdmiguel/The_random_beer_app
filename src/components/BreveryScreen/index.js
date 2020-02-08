@@ -10,7 +10,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Title from "../core/Title";
 import Description from "../core/Description";
 import Link from "../core/Link";
-import Button from "../core/Button";
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -26,12 +25,6 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(3),
     marginRight: theme.spacing(3)
   },
-  blockBtn: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: theme.spacing(5)
-  },
   blockImg: {
     display: "flex",
     justifyContent: "center",
@@ -42,21 +35,18 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const BreveryDetail = ({
+const BreveryScreen = ({
   beerName,
   beerDescription,
   beerLabel,
   onClickBtn
 }) => {
   const classes = useStyles();
-  const { wrapper, container, blockImg, blockBtn, blockTxt } = classes;
+  const { wrapper, container, blockImg, blockTxt } = classes;
 
   return (
     <div className="main-content">
       <Grid container className={wrapper}>
-        <Grid item xs={12} className={blockBtn}>
-          <Button onClick={onClickBtn}>Show a new beer</Button>
-        </Grid>
         <Grid item xs={12} lg={8}>
           <Paper elevation={3} className={container}>
             <Grid container spacing={4}>
@@ -82,11 +72,11 @@ const BreveryDetail = ({
   );
 };
 
-BreveryDetail.propTypes = {
+BreveryScreen.propTypes = {
   beerName: PropTypes.string,
   beerDescription: PropTypes.string,
   beerLabel: PropTypes.string,
   onClickBtn: PropTypes.func
 };
 
-export default BreveryDetail;
+export default BreveryScreen;

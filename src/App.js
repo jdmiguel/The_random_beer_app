@@ -1,11 +1,15 @@
 import React from "react";
 
 /** Services */
-import { getRandomBeer, getBeer } from "./services/api";
+import { getRandomBeerService, getBeerService } from "./services/api";
 
 /** Components */
-import Main from "./components/Main";
-import BreveryDetail from "./components/BreveryDetail";
+import MainScreen from "./components/MainScreen";
+import BreveryScreen from "./components/BreveryScreen";
+import Logo from "./components/Logo";
+
+/** Core */
+import Loader from "./components/core/Loader";
 
 /** Constants */
 import { DEFAULT_LABEL } from "./utils/constants";
@@ -21,60 +25,65 @@ const App = () => {
   const beerLabel = React.useRef(null);
   const hasBrevery = React.useRef(null);
 
-  const getRandomBeerHandler = React.useCallback(() => {
+  const getScreen = () =>
+    isMain ? (
+      <MainScreen
+        beerName={beerName.current}
+        beerDescription={beerDescription.current}
+        beerLabel={beerLabel.current}
+        hasBrevery={hasBrevery.current}
+        onClickBtn={getRandomBeer}
+        onClickLink={goBreveryDetail}
+      />
+    ) : (
+      <BreveryScreen
+        beerName={beerName.current}
+        beerDescription={beerDescription.current}
+        beerLabel={beerLabel.current}
+      />
+    );
+
+  const getBeerById = React.useCallback(
+    id => {
+      getBeerService(id).then(response => {
+        const { data } = response;
+
+        beerName.current = data.name;
+        beerDescription.current =
+          (data.style && data.style.description) || "Description not found";
+        beerLabel.current = data.labels ? data.labels.medium : DEFAULT_LABEL;
+        hasBrevery.current = !!data.breweries.length;
+
+        setIsLoading(false);
+      });
+    },
+    [beerName, beerDescription]
+  );
+
+  const getRandomBeer = React.useCallback(() => {
     setIsLoading(true);
-    getRandomBeer().then(response => {
-      const { data } = response;
+    getRandomBeerService().then(response => {
+      const {
+        data: { id }
+      } = response;
 
-      beerName.current = data.name;
-      beerDescription.current =
-        (data.style && data.style.description) || "Description not found";
-      beerLabel.current = data.labels ? data.labels.medium : DEFAULT_LABEL;
-      hasBrevery.current = !!data.breweries.length;
-
-      setIsLoading(false);
+      getBeerById(id);
     });
+  }, [getBeerById]);
 
-    /*
-    getBeer("c4f2KE").then(response => {
-      const { data } = response;
-
-      beerName.current = data.name;
-      beerDescription.current =
-        (data.style && data.style.description) || "Description not found";
-      beerLabel.current = data.labels ? data.labels.medium : DEFAULT_LABEL;
-
-      setIsLoading(false);
-    });
-    */
-  }, [beerName, beerDescription]);
-
-  const goBreveryDetail = React.useCallback(() => {
-    setIsLoading(true);
-  }, []);
+  const goBreveryDetail = () => {
+    setIsMain(false);
+  };
 
   React.useEffect(() => {
-    getRandomBeerHandler();
-  }, [getRandomBeerHandler]);
+    getRandomBeer();
+  }, [getRandomBeer]);
 
-  return isMain ? (
-    <Main
-      isLoading={isLoading}
-      beerName={beerName.current}
-      beerDescription={beerDescription.current}
-      beerLabel={beerLabel.current}
-      hasBrevery={hasBrevery.current}
-      onClickBtn={getRandomBeerHandler}
-      onClickLink={goBreveryDetail}
-    />
-  ) : (
-    <BreveryDetail
-      isLoading={isLoading}
-      beerName={beerName.current}
-      beerDescription={beerDescription.current}
-      beerLabel={beerLabel.current}
-      onClickBtn={getRandomBeerHandler}
-    />
+  return (
+    <React.Fragment>
+      <Logo />
+      {isLoading ? <Loader /> : getScreen()}
+    </React.Fragment>
   );
 };
 

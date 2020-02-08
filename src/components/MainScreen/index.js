@@ -7,13 +7,13 @@ import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 
 /** Components */
-import BreveryNotFound from "../BreveryNotFound";
+import BreveryNotFoundMsg from "./BreveryNotFoundMsg";
 
 /** Core */
-import Title from "../../core/Title";
-import Description from "../../core/Description";
-import Link from "../../core/Link";
-import Button from "../../core/Button";
+import Title from "../core/Title";
+import Description from "../core/Description";
+import Link from "../core/Link";
+import Button from "../core/Button";
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Content = ({
+const MainScreen = ({
   beerName,
   beerDescription,
   beerLabel,
@@ -57,7 +57,7 @@ const Content = ({
   const { wrapper, container, blockImg, blockBtn, blockTxt } = classes;
 
   return (
-    <div className="main-content">
+    <div className="mainScreen-container">
       <Grid container className={wrapper}>
         <Grid item xs={12} className={blockBtn}>
           <Button onClick={onClickBtn}>Show a new beer</Button>
@@ -78,19 +78,20 @@ const Content = ({
             </Paper>
           </Grid>
         ) : (
-          <BreveryNotFound />
+          <BreveryNotFoundMsg />
         )}
       </Grid>
     </div>
   );
 };
 
-Content.propTypes = {
+MainScreen.propTypes = {
   beerName: PropTypes.string,
   beerDescription: PropTypes.string,
   beerLabel: PropTypes.string,
+  hasBrevery: PropTypes.bool,
   onClickBtn: PropTypes.func,
   onClickLink: PropTypes.func
 };
 
-export default Content;
+export default MainScreen;

@@ -3,7 +3,7 @@ import { request } from ".";
 /** Constants */
 import { API_BEER } from "../utils/constants";
 
-export const getRandomBeer = () =>
+export const getRandomBeerService = () =>
   request(`${API_BEER}random/`, {
     method: "GET",
     params: {
@@ -13,7 +13,7 @@ export const getRandomBeer = () =>
     }
   });
 
-export const getBeer = id =>
+export const getBeerService = id =>
   request(`${API_BEER}${id}/`, {
     method: "GET",
     params: {

@@ -34,22 +34,33 @@
   background: #313131;
 }
 
-.main-content .link {
+.mainScreen-container .link {
   position: absolute;
   bottom: 15px;
+  opacity: 0;
+  animation: introTitle 0.35s linear 0.5s forwards;
 }
 
 @media screen and (max-width: 1440px) {
-  .main-content .link {
+  .mainScreen-container .link {
     bottom: 0;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .main-content .link {
+  .mainScreen-container .link {
     position: initial;
   }
   .link:after {
     display: none;
+  }
+}
+
+@keyframes introMainLink {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
