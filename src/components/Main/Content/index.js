@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 /** Material-UI */
 import Grid from "@material-ui/core/Grid";
@@ -41,7 +42,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Content = ({ beerName, beerDescription, onClickBtn }) => {
+const Content = ({ beerName, beerDescription, beerLabel, onClickBtn }) => {
   const classes = useStyles();
   const { wrapper, container, blockImg, blockBtn, blockTxt } = classes;
 
@@ -54,13 +55,10 @@ const Content = ({ beerName, beerDescription, onClickBtn }) => {
         <Grid item xs={12} lg={8}>
           <Paper elevation={3} className={container}>
             <Grid container spacing={4}>
-              <Grid item xs={12} lg={6} className={blockImg}>
-                <img
-                  src="https://touch.daft.ie/static/images/fallbacks/no-image-size740x480.jpg"
-                  alt="not found"
-                ></img>
+              <Grid item xs={12} lg={4} className={blockImg}>
+                <img src={beerLabel} alt="not found"></img>
               </Grid>
-              <Grid item xs={12} lg={6} className={blockTxt}>
+              <Grid item xs={12} lg={8} className={blockTxt}>
                 <Title>{beerName}</Title>
                 <Description>{beerDescription}</Description>
                 <Link
@@ -77,6 +75,13 @@ const Content = ({ beerName, beerDescription, onClickBtn }) => {
       </Grid>
     </div>
   );
+};
+
+Content.propTypes = {
+  beerName: PropTypes.string,
+  beerDescription: PropTypes.string,
+  beerLabel: PropTypes.string,
+  onClickBtn: PropTypes.func
 };
 
 export default Content;

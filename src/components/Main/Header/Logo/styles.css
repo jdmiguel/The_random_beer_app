@@ -11,11 +11,17 @@
   font-size: 1.8em;
   line-height: 0;
   letter-spacing: 0.5px;
-  text-shadow: 2px 1px 2px #7c7c7c;
+  opacity: 0;
+  animation: introTitle 0.35s ease-out 0.5s forwards;
+  font-size-adjust: 0;
 }
 
 .logo-title span {
   display: block;
+}
+
+.logo-container svg {
+  animation: introBeerSvg 0.65s ease-out forwards;
 }
 
 @media screen and (max-width: 767px) {
@@ -31,5 +37,25 @@
   }
   .logo-title {
     font-size: 0.7em;
+  }
+}
+
+@keyframes introBeerSvg {
+  from {
+    transform: translateX(-200px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes introTitle {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

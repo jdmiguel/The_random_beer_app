@@ -10,7 +10,7 @@
   font-size: 1.1em;
   transition: background 0.35s ease-out;
   letter-spacing: 0.5px;
-  box-shadow: 1px 1px 8px 1px rgba(50, 50, 50, 0.3);
+  box-shadow: 1px 1px 8px 3px rgba(50, 50, 50, 0.12);
 }
 
 .button:hover {

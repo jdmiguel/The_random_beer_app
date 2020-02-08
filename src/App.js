@@ -1,10 +1,13 @@
 import React from "react";
 
 /** Services */
-import { getRandomBeer } from "./services/api";
+import { getRandomBeer, getBeer } from "./services/api";
 
 /** Components */
 import Main from "./components/Main";
+
+/** Constants */
+import { DEFAULT_LABEL } from "./utils/constants";
 
 const App = () => {
   // States
@@ -14,6 +17,7 @@ const App = () => {
   // Refs
   const beerName = React.useRef(null);
   const beerDescription = React.useRef(null);
+  const beerLabel = React.useRef(null);
 
   const getRandomBeerHandler = React.useCallback(() => {
     setIsLoading(true);
@@ -23,8 +27,23 @@ const App = () => {
       beerName.current = data.name;
       beerDescription.current =
         (data.style && data.style.description) || "Description not found";
+      beerLabel.current = data.labels ? data.labels.medium : DEFAULT_LABEL;
+
       setIsLoading(false);
     });
+
+    /*
+    getBeer("c4f2KE").then(response => {
+      const { data } = response;
+
+      beerName.current = data.name;
+      beerDescription.current =
+        (data.style && data.style.description) || "Description not found";
+      beerLabel.current = data.labels ? data.labels.medium : DEFAULT_LABEL;
+
+      setIsLoading(false);
+    });
+    */
   }, [beerName, beerDescription]);
 
   React.useEffect(() => {
@@ -36,6 +55,7 @@ const App = () => {
       isLoading={isLoading}
       beerName={beerName.current}
       beerDescription={beerDescription.current}
+      beerLabel={beerLabel.current}
       onClickBtn={getRandomBeerHandler}
     />
   );
