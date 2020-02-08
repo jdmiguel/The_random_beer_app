@@ -21,7 +21,16 @@ h2 {
   text-overflow: ellipsis;
 }
 
-p {
+h3 {
+  font-size: 1.8em;
+  color: #575757;
+  letter-spacing: 0.5px;
+  font-weight: 200;
+  margin-right: 20px;
+}
+
+p,
+span {
   color: #575757;
   line-height: 1.4em;
 }
@@ -35,6 +44,10 @@ p {
 @media screen and (max-width: 500px) {
   h2 {
     font-size: 1.5em;
+  }
+
+  h3 {
+    font-size: 1.2em;
   }
 
   p {

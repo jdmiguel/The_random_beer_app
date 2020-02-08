@@ -2,10 +2,11 @@ export const logoTitle = "The Random Beer App";
 
 export const mainScreenLiterals = {
   randomBtnTxt: "Show a new beer",
-  goBreweryBtnTxt: "Show Brevery details"
+  breweryTxt: "BREWERY: "
 };
 
 export const breweryScreenLiterals = {
-  backBtnTxt: "Back to main screen",
-  breweryTitle: "Brewery"
+  backBtnTxt: "<< BACK",
+  breweryTitle: "Brewery details",
+  yearTxt: "Start year: "
 };

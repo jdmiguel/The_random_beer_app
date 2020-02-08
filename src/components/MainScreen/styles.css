@@ -1,0 +1,33 @@
+.brewery-data {
+  position: absolute;
+  bottom: 15px;
+  opacity: 0;
+  animation: introBrewery 0.35s linear 0.65s forwards;
+  display: flex;
+}
+
+.brewery-data .link {
+  font-size: 0.9em;
+  margin: 2px 0 0 6px;
+}
+
+@media screen and (max-width: 1440px) {
+  .brewery-data {
+    bottom: 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .brewery-data {
+    position: initial;
+  }
+}
+
+@keyframes introBrewery {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

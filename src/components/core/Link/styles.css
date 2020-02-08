@@ -9,8 +9,10 @@
   font-weight: bold;
   position: relative;
   font-size: 0.85em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   transition: color 0.35s ease-out;
-  margin-top: 15px;
 }
 
 .link:hover {
@@ -24,7 +26,7 @@
   background: #f29b3b;
   position: absolute;
   left: 0;
-  top: 15px;
+  top: 17px;
   z-index: 1;
   transition: all 0.35s ease-out;
 }
@@ -34,23 +36,7 @@
   background: #313131;
 }
 
-.mainScreen-container .link {
-  position: absolute;
-  bottom: 15px;
-  opacity: 0;
-  animation: introTitle 0.35s linear 0.5s forwards;
-}
-
-@media screen and (max-width: 1440px) {
-  .mainScreen-container .link {
-    bottom: 0;
-  }
-}
-
 @media screen and (max-width: 767px) {
-  .mainScreen-container .link {
-    position: initial;
-  }
   .link:after {
     display: none;
   }

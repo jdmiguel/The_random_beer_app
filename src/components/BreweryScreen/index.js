@@ -45,33 +45,40 @@ const BreweryScreen = ({
   breweryName,
   breweryDescription,
   breweryLabel,
+  breweryYear,
   onClickBackBtn
 }) => {
   const classes = useStyles();
   const { wrapper, container, blockImg, blockTxt } = classes;
 
   return (
-    <Grid container className={wrapper}>
-      <Grid item xs={12} lg={8}>
-        <div className="breweryScreen-upper-container">
-          <Link onClick={onClickBackBtn}>
-            {breweryScreenLiterals.backBtnTxt}
-          </Link>
-          <h3>{breweryScreenLiterals.breweryTitle}</h3>
-        </div>
-        <Paper elevation={3} className={container}>
-          <Grid container spacing={4}>
-            <Grid item xs={12} lg={4} className={blockImg}>
-              <img src={breweryLabel} alt="not found"></img>
+    <div className="breweryScreen-container">
+      <Grid container className={wrapper}>
+        <Grid item xs={12} lg={8}>
+          <div className="breweryScreen-upper-container">
+            <Link onClick={onClickBackBtn}>
+              {breweryScreenLiterals.backBtnTxt}
+            </Link>
+            <h3>{breweryScreenLiterals.breweryTitle}</h3>
+          </div>
+          <Paper elevation={3} className={container}>
+            <Grid container spacing={4}>
+              <Grid item xs={12} lg={4} className={blockImg}>
+                <img src={breweryLabel} alt="not found"></img>
+              </Grid>
+              <Grid item xs={12} lg={8} className={blockTxt}>
+                <Title>{breweryName}</Title>
+                <Description>{breweryDescription}</Description>
+                <div className="breweryScreen-year-container">
+                  {breweryScreenLiterals.yearTxt}
+                  <span>{breweryYear}</span>
+                </div>
+              </Grid>
             </Grid>
-            <Grid item xs={12} lg={8} className={blockTxt}>
-              <Title>{breweryName}</Title>
-              <Description>{breweryDescription}</Description>
-            </Grid>
-          </Grid>
-        </Paper>
+          </Paper>
+        </Grid>
       </Grid>
-    </Grid>
+    </div>
   );
 };
 
@@ -79,6 +86,7 @@ BreweryScreen.propTypes = {
   breweryName: PropTypes.string,
   breweryDescription: PropTypes.string,
   breweryLabel: PropTypes.string,
+  breweryYear: PropTypes.string,
   onClickBackBtn: PropTypes.func
 };
 

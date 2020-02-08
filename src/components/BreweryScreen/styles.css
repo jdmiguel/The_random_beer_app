@@ -1,5 +1,45 @@
 .breweryScreen-upper-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+}
+
+.breweryScreen-upper-container .link {
+  margin: 10px 0 0 25px;
+  font-size: 1.2em;
+}
+
+.breweryScreen-upper-container .link:after {
+  top: 22px;
+}
+
+.breweryScreen-year-container {
+  position: absolute;
+  bottom: 15px;
+  opacity: 0;
+  animation: introYear 0.35s linear 0.5s forwards;
+  text-transform: uppercase;
+  display: flex;
+  color: #575757;
+}
+
+.breweryScreen-year-container span {
+  color: #313131;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+@media screen and (max-width: 1279px) {
+  .breweryScreen-container .description {
+    margin-bottom: 30px;
+  }
+}
+
+@keyframes introYear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

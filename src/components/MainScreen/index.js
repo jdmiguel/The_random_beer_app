@@ -18,6 +18,9 @@ import Button from "../core/Button";
 /** Literals */
 import { mainScreenLiterals } from "../../utils/literals";
 
+/** Styles */
+import "./styles.css";
+
 const useStyles = makeStyles(theme => ({
   wrapper: {
     display: "flex",
@@ -53,6 +56,7 @@ const MainScreen = ({
   beerDescription,
   beerLabel,
   hasBrewery,
+  breweryName,
   onClickRandomBtn,
   onClickGoBreweryBtn
 }) => {
@@ -77,9 +81,10 @@ const MainScreen = ({
                 <Grid item xs={12} lg={8} className={blockTxt}>
                   <Title>{beerName}</Title>
                   <Description>{beerDescription}</Description>
-                  <Link onClick={onClickGoBreweryBtn}>
-                    {mainScreenLiterals.goBreweryBtnTxt}
-                  </Link>
+                  <div className="brewery-data">
+                    <span>{mainScreenLiterals.breweryTxt}</span>
+                    <Link onClick={onClickGoBreweryBtn}>{breweryName}</Link>
+                  </div>
                 </Grid>
               </Grid>
             </Paper>
@@ -97,6 +102,7 @@ MainScreen.propTypes = {
   beerDescription: PropTypes.string,
   beerLabel: PropTypes.string,
   hasBrewery: PropTypes.bool,
+  breweryName: PropTypes.string,
   onClickRandomBtn: PropTypes.func,
   onClickGoBreweryBtn: PropTypes.func
 };

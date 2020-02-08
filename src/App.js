@@ -32,6 +32,7 @@ const App = () => {
   const breweryName = React.useRef(null);
   const breweryDescription = React.useRef(null);
   const breweryLabel = React.useRef(null);
+  const breweryYear = React.useRef(null);
 
   const getScreen = () =>
     isMain ? (
@@ -40,6 +41,7 @@ const App = () => {
         beerDescription={beerDescription.current}
         beerLabel={beerLabel.current}
         hasBrewery={hasBrewery.current}
+        breweryName={breweryName.current}
         onClickRandomBtn={getRandomBeer}
         onClickGoBreweryBtn={goBreweryScreen}
       />
@@ -48,6 +50,7 @@ const App = () => {
         breweryName={breweryName.current}
         breweryDescription={breweryDescription.current}
         breweryLabel={breweryLabel.current}
+        breweryYear={breweryYear.current}
         onClickBackBtn={goMainScreen}
       />
     );
@@ -63,6 +66,11 @@ const App = () => {
         beerLabel.current = data.labels ? data.labels.medium : DEFAULT_LABEL;
         hasBrewery.current = !!data.breweries.length;
         breweryId.current = data.breweries.length ? data.breweries[0].id : null;
+
+        const [breweryData] = data.breweries;
+        breweryId.current = breweryData.id;
+        breweryName.current = breweryData.name;
+        breweryYear.current = breweryData.established;
 
         setIsLoading(false);
       });
@@ -87,7 +95,6 @@ const App = () => {
       getBreweryByIdService(breweryId.current).then(response => {
         const { data } = response;
 
-        breweryName.current = data.name;
         breweryDescription.current =
           data.description || "Description not found";
         breweryLabel.current =
