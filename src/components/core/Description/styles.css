@@ -1,0 +1,16 @@
+.description {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+@media screen and (max-width: 1440px) {
+  .description {
+    max-height: 197px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .description {
+    max-height: initial;
+  }
+}

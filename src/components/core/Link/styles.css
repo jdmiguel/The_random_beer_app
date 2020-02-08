@@ -10,6 +10,7 @@
   position: relative;
   font-size: 0.85em;
   transition: color 0.35s ease-out;
+  margin-top: 15px;
 }
 
 .link:hover {
@@ -31,4 +32,24 @@
 .link:hover::after {
   width: 0;
   background: #313131;
+}
+
+.main-content .link {
+  position: absolute;
+  bottom: 15px;
+}
+
+@media screen and (max-width: 1440px) {
+  .main-content .link {
+    bottom: 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .main-content .link {
+    position: initial;
+  }
+  .link:after {
+    display: none;
+  }
 }

@@ -35,48 +35,47 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center"
+  },
+  blockTxt: {
+    position: "relative"
   }
 }));
 
-const Content = () => {
+const Content = ({ beerName, beerDescription, onClickBtn }) => {
   const classes = useStyles();
-  const { wrapper, container, blockImg, blockBtn } = classes;
+  const { wrapper, container, blockImg, blockBtn, blockTxt } = classes;
 
   return (
-    <Grid container className={wrapper}>
-      <Grid item xs={12} className={blockBtn}>
-        <Button
-          onClick={() => {
-            console.log("onClick button");
-          }}
-        >
-          Show a new beer
-        </Button>
-      </Grid>
-      <Grid item xs={12} lg={6}>
-        <Paper elevation={3} className={container}>
-          <Grid container spacing={4}>
-            <Grid item xs={12} lg={6} className={blockImg}>
-              <img
-                src="https://touch.daft.ie/static/images/fallbacks/no-image-size740x480.jpg"
-                alt="not found"
-              ></img>
+    <div className="main-content">
+      <Grid container className={wrapper}>
+        <Grid item xs={12} className={blockBtn}>
+          <Button onClick={onClickBtn}>Show a new beer</Button>
+        </Grid>
+        <Grid item xs={12} lg={8}>
+          <Paper elevation={3} className={container}>
+            <Grid container spacing={4}>
+              <Grid item xs={12} lg={6} className={blockImg}>
+                <img
+                  src="https://touch.daft.ie/static/images/fallbacks/no-image-size740x480.jpg"
+                  alt="not found"
+                ></img>
+              </Grid>
+              <Grid item xs={12} lg={6} className={blockTxt}>
+                <Title>{beerName}</Title>
+                <Description>{beerDescription}</Description>
+                <Link
+                  onClick={() => {
+                    console.log("onClick link");
+                  }}
+                >
+                  Show Brevery details
+                </Link>
+              </Grid>
             </Grid>
-            <Grid item xs={12} lg={6}>
-              <Title />
-              <Description />
-              <Link
-                onClick={() => {
-                  console.log("onClick link");
-                }}
-              >
-                Show Brevery details
-              </Link>
-            </Grid>
-          </Grid>
-        </Paper>
+          </Paper>
+        </Grid>
       </Grid>
-    </Grid>
+    </div>
   );
 };
 

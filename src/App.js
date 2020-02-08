@@ -7,11 +7,38 @@ import { getRandomBeer } from "./services/api";
 import Main from "./components/Main";
 
 const App = () => {
-  React.useEffect(() => {
-    getRandomBeer().then(response => console.log("response: ", response));
-  }, []);
+  // States
+  const [isMain, setIsMain] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(true);
 
-  return <Main />;
+  // Refs
+  const beerName = React.useRef(null);
+  const beerDescription = React.useRef(null);
+
+  const getRandomBeerHandler = React.useCallback(() => {
+    setIsLoading(true);
+    getRandomBeer().then(response => {
+      const { data } = response;
+
+      beerName.current = data.name;
+      beerDescription.current =
+        (data.style && data.style.description) || "Description not found";
+      setIsLoading(false);
+    });
+  }, [beerName, beerDescription]);
+
+  React.useEffect(() => {
+    getRandomBeerHandler();
+  }, [getRandomBeerHandler]);
+
+  return (
+    <Main
+      isLoading={isLoading}
+      beerName={beerName.current}
+      beerDescription={beerDescription.current}
+      onClickBtn={getRandomBeerHandler}
+    />
+  );
 };
 
 export default App;
