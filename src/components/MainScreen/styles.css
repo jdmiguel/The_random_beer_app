@@ -1,3 +1,8 @@
+.mainScreen-container {
+  opacity: 0;
+  animation: introMainScreen 0.65s ease-in-out 0.4s forwards;
+}
+
 .brewery-data {
   position: absolute;
   bottom: 15px;
@@ -20,6 +25,17 @@
 @media screen and (max-width: 767px) {
   .brewery-data {
     position: initial;
+  }
+}
+
+@keyframes introMainScreen {
+  from {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 

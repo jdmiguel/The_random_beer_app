@@ -1,3 +1,8 @@
+.breweryScreen-container {
+  opacity: 0;
+  animation: introBreweryScreen 0.65s ease-in-out 0.3s forwards;
+}
+
 .breweryScreen-upper-container {
   display: flex;
   justify-content: space-between;
@@ -32,6 +37,17 @@
 @media screen and (max-width: 1279px) {
   .breweryScreen-container .description {
     margin-bottom: 30px;
+  }
+}
+
+@keyframes introBreweryScreen {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
