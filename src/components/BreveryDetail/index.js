@@ -6,14 +6,11 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 
-/** Components */
-import BreveryNotFound from "../BreveryNotFound";
-
 /** Core */
-import Title from "../../core/Title";
-import Description from "../../core/Description";
-import Link from "../../core/Link";
-import Button from "../../core/Button";
+import Title from "../core/Title";
+import Description from "../core/Description";
+import Link from "../core/Link";
+import Button from "../core/Button";
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -45,13 +42,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Content = ({
+const BreveryDetail = ({
   beerName,
   beerDescription,
   beerLabel,
-  hasBrevery,
-  onClickBtn,
-  onClickLink
+  onClickBtn
 }) => {
   const classes = useStyles();
   const { wrapper, container, blockImg, blockBtn, blockTxt } = classes;
@@ -62,35 +57,36 @@ const Content = ({
         <Grid item xs={12} className={blockBtn}>
           <Button onClick={onClickBtn}>Show a new beer</Button>
         </Grid>
-        {hasBrevery ? (
-          <Grid item xs={12} lg={8}>
-            <Paper elevation={3} className={container}>
-              <Grid container spacing={4}>
-                <Grid item xs={12} lg={4} className={blockImg}>
-                  <img src={beerLabel} alt="not found"></img>
-                </Grid>
-                <Grid item xs={12} lg={8} className={blockTxt}>
-                  <Title>{beerName}</Title>
-                  <Description>{beerDescription}</Description>
-                  <Link onClick={onClickLink}>Show Brevery details</Link>
-                </Grid>
+        <Grid item xs={12} lg={8}>
+          <Paper elevation={3} className={container}>
+            <Grid container spacing={4}>
+              <Grid item xs={12} lg={4} className={blockImg}>
+                <img src={beerLabel} alt="not found"></img>
               </Grid>
-            </Paper>
-          </Grid>
-        ) : (
-          <BreveryNotFound />
-        )}
+              <Grid item xs={12} lg={8} className={blockTxt}>
+                <Title>{beerName}</Title>
+                <Description>{beerDescription}</Description>
+                <Link
+                  onClick={() => {
+                    console.log("onClick link");
+                  }}
+                >
+                  Show Brevery details
+                </Link>
+              </Grid>
+            </Grid>
+          </Paper>
+        </Grid>
       </Grid>
     </div>
   );
 };
 
-Content.propTypes = {
+BreveryDetail.propTypes = {
   beerName: PropTypes.string,
   beerDescription: PropTypes.string,
   beerLabel: PropTypes.string,
-  onClickBtn: PropTypes.func,
-  onClickLink: PropTypes.func
+  onClickBtn: PropTypes.func
 };
 
-export default Content;
+export default BreveryDetail;

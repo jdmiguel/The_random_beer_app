@@ -13,7 +13,9 @@ const Main = ({
   beerName,
   beerDescription,
   beerLabel,
-  onClickBtn
+  hasBrevery,
+  onClickBtn,
+  onClickLink
 }) => (
   <React.Fragment>
     <Header />
@@ -24,7 +26,9 @@ const Main = ({
         beerName={beerName}
         beerDescription={beerDescription}
         beerLabel={beerLabel}
+        hasBrevery={hasBrevery}
         onClickBtn={onClickBtn}
+        onClickLink={onClickLink}
         className="content"
       />
     )}
@@ -35,7 +39,9 @@ Main.propTypes = {
   beerName: PropTypes.string,
   beerDescription: PropTypes.string,
   beerLabel: PropTypes.string,
-  onClickBtn: PropTypes.func
+  hasBrevery: PropTypes.bool,
+  onClickBtn: PropTypes.func,
+  onClickLink: PropTypes.func
 };
 
 export default Main;
