@@ -1,1 +1,1 @@
-export const API_PIXABAY = "https://pixabay.com/api/";
+export const API_BEER = "http://api.brewerydb.com/v2/beer/";

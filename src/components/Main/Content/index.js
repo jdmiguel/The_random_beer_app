@@ -14,25 +14,27 @@ import Button from "../../core/Button";
 const useStyles = makeStyles(theme => ({
   wrapper: {
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
+    marginBottom: theme.spacing(3)
   },
   container: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    padding: theme.spacing(4)
-  },
-  blockImg: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
+    padding: theme.spacing(4),
+    marginLeft: theme.spacing(3),
+    marginRight: theme.spacing(3)
   },
   blockBtn: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: theme.spacing(5),
     marginBottom: theme.spacing(5)
+  },
+  blockImg: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
   }
 }));
 
@@ -42,16 +44,25 @@ const Content = () => {
 
   return (
     <Grid container className={wrapper}>
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12} className={blockBtn}>
+        <Button
+          onClick={() => {
+            console.log("onClick button");
+          }}
+        >
+          Show a new beer
+        </Button>
+      </Grid>
+      <Grid item xs={12} lg={6}>
         <Paper elevation={3} className={container}>
           <Grid container spacing={4}>
-            <Grid item xs={12} sm={6} className={blockImg}>
+            <Grid item xs={12} lg={6} className={blockImg}>
               <img
                 src="https://touch.daft.ie/static/images/fallbacks/no-image-size740x480.jpg"
                 alt="not found"
               ></img>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} lg={6}>
               <Title />
               <Description />
               <Link
@@ -64,17 +75,6 @@ const Content = () => {
             </Grid>
           </Grid>
         </Paper>
-      </Grid>
-      <Grid container>
-        <Grid item xs={12} className={blockBtn}>
-          <Button
-            onClick={() => {
-              console.log("onClick button");
-            }}
-          >
-            Show a new beer
-          </Button>
-        </Grid>
       </Grid>
     </Grid>
   );

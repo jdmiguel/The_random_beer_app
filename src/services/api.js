@@ -1,14 +1,15 @@
-import { API_PIXABAY } from "../utils/constants";
+import { API_BEER } from "../utils/constants";
 import { request } from ".";
 
-export const getImages = (page = 1) =>
-  request(API_PIXABAY, {
+export const getRandomBeer = () =>
+  request(`${API_BEER}random/`, {
     method: "GET",
+    headers: {
+      "Access-Control-Allow-Origin": "*"
+    },
     params: {
-      key: "6473511-0417f2cad683f1bee54cafe15",
-      q: "ireland",
-      image_type: "photo",
-      page,
-      per_page: 12
+      key: "a5c1b917e7ba62dcd79f434ed73bc72d",
+      hasLabels: "Y",
+      withBreweries: "Y"
     }
   });

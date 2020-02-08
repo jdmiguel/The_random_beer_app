@@ -10,8 +10,8 @@ import axios from "axios";
  */
 const handleError = ({ response }) => {
   const error = {
-    code: response.status,
-    message: response.data ? response.data.message : null
+    code: response && response.status,
+    message: response && response.data ? response.data.message : null
   };
   throw error;
 };

@@ -21,3 +21,13 @@ p {
   color: #575757;
   line-height: 1.4em;
 }
+
+@media screen and (max-width: 500px) {
+  h2 {
+    font-size: 1.5em;
+  }
+
+  p {
+    line-height: 1.3em;
+  }
+}
