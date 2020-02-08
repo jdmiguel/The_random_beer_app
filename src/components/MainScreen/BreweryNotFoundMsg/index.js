@@ -7,7 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 /** Styles */
 import "./styles.css";
 
-const BreveryNotFound = () => {
+const BreweryNotFound = () => {
   const useStyles = makeStyles(theme => ({
     wrapper: {
       display: "flex",
@@ -22,7 +22,7 @@ const BreveryNotFound = () => {
       <Grid container className={classes.wrapper}>
         <Grid item xs={12}>
           <p>
-            Sorry, this beer doesn't have brevery, so try to get another one
+            Sorry, this beer doesn't have brewery, so try to get another one
             clicking the upper button
           </p>
         </Grid>
@@ -31,4 +31,4 @@ const BreveryNotFound = () => {
   );
 };
 
-export default BreveryNotFound;
+export default BreweryNotFound;

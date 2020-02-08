@@ -7,13 +7,16 @@ import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 
 /** Components */
-import BreveryNotFoundMsg from "./BreveryNotFoundMsg";
+import BreweryNotFoundMsg from "./BreweryNotFoundMsg";
 
 /** Core */
 import Title from "../core/Title";
 import Description from "../core/Description";
 import Link from "../core/Link";
 import Button from "../core/Button";
+
+/** Literals */
+import { mainScreenLiterals } from "../../utils/literals";
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -49,9 +52,9 @@ const MainScreen = ({
   beerName,
   beerDescription,
   beerLabel,
-  hasBrevery,
-  onClickBtn,
-  onClickLink
+  hasBrewery,
+  onClickRandomBtn,
+  onClickGoBreweryBtn
 }) => {
   const classes = useStyles();
   const { wrapper, container, blockImg, blockBtn, blockTxt } = classes;
@@ -60,9 +63,11 @@ const MainScreen = ({
     <div className="mainScreen-container">
       <Grid container className={wrapper}>
         <Grid item xs={12} className={blockBtn}>
-          <Button onClick={onClickBtn}>Show a new beer</Button>
+          <Button onClick={onClickRandomBtn}>
+            {mainScreenLiterals.randomBtnTxt}
+          </Button>
         </Grid>
-        {hasBrevery ? (
+        {hasBrewery ? (
           <Grid item xs={12} lg={8}>
             <Paper elevation={3} className={container}>
               <Grid container spacing={4}>
@@ -72,13 +77,15 @@ const MainScreen = ({
                 <Grid item xs={12} lg={8} className={blockTxt}>
                   <Title>{beerName}</Title>
                   <Description>{beerDescription}</Description>
-                  <Link onClick={onClickLink}>Show Brevery details</Link>
+                  <Link onClick={onClickGoBreweryBtn}>
+                    {mainScreenLiterals.goBreweryBtnTxt}
+                  </Link>
                 </Grid>
               </Grid>
             </Paper>
           </Grid>
         ) : (
-          <BreveryNotFoundMsg />
+          <BreweryNotFoundMsg />
         )}
       </Grid>
     </div>
@@ -89,9 +96,9 @@ MainScreen.propTypes = {
   beerName: PropTypes.string,
   beerDescription: PropTypes.string,
   beerLabel: PropTypes.string,
-  hasBrevery: PropTypes.bool,
-  onClickBtn: PropTypes.func,
-  onClickLink: PropTypes.func
+  hasBrewery: PropTypes.bool,
+  onClickRandomBtn: PropTypes.func,
+  onClickGoBreweryBtn: PropTypes.func
 };
 
 export default MainScreen;

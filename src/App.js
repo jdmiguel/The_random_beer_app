@@ -1,11 +1,15 @@
 import React from "react";
 
 /** Services */
-import { getRandomBeerService, getBeerService } from "./services/api";
+import {
+  getRandomBeerService,
+  getBeerByIdService,
+  getBreweryByIdService
+} from "./services/api";
 
 /** Components */
 import MainScreen from "./components/MainScreen";
-import BreveryScreen from "./components/BreveryScreen";
+import BreweryScreen from "./components/BreweryScreen";
 import Logo from "./components/Logo";
 
 /** Core */
@@ -23,7 +27,11 @@ const App = () => {
   const beerName = React.useRef(null);
   const beerDescription = React.useRef(null);
   const beerLabel = React.useRef(null);
-  const hasBrevery = React.useRef(null);
+  const hasBrewery = React.useRef(null);
+  const breweryId = React.useRef(null);
+  const breweryName = React.useRef(null);
+  const breweryDescription = React.useRef(null);
+  const breweryLabel = React.useRef(null);
 
   const getScreen = () =>
     isMain ? (
@@ -31,28 +39,30 @@ const App = () => {
         beerName={beerName.current}
         beerDescription={beerDescription.current}
         beerLabel={beerLabel.current}
-        hasBrevery={hasBrevery.current}
-        onClickBtn={getRandomBeer}
-        onClickLink={goBreveryDetail}
+        hasBrewery={hasBrewery.current}
+        onClickRandomBtn={getRandomBeer}
+        onClickGoBreweryBtn={goBreweryScreen}
       />
     ) : (
-      <BreveryScreen
-        beerName={beerName.current}
-        beerDescription={beerDescription.current}
-        beerLabel={beerLabel.current}
+      <BreweryScreen
+        breweryName={breweryName.current}
+        breweryDescription={breweryDescription.current}
+        breweryLabel={breweryLabel.current}
+        onClickBackBtn={goMainScreen}
       />
     );
 
   const getBeerById = React.useCallback(
     id => {
-      getBeerService(id).then(response => {
+      getBeerByIdService(id).then(response => {
         const { data } = response;
 
         beerName.current = data.name;
         beerDescription.current =
           (data.style && data.style.description) || "Description not found";
         beerLabel.current = data.labels ? data.labels.medium : DEFAULT_LABEL;
-        hasBrevery.current = !!data.breweries.length;
+        hasBrewery.current = !!data.breweries.length;
+        breweryId.current = data.breweries.length ? data.breweries[0].id : null;
 
         setIsLoading(false);
       });
@@ -71,8 +81,28 @@ const App = () => {
     });
   }, [getBeerById]);
 
-  const goBreveryDetail = () => {
-    setIsMain(false);
+  const goBreweryScreen = () => {
+    setIsLoading(true);
+    if (breweryId.current) {
+      getBreweryByIdService(breweryId.current).then(response => {
+        const { data } = response;
+
+        breweryName.current = data.name;
+        breweryDescription.current =
+          data.description || "Description not found";
+        breweryLabel.current =
+          data.images && data.images.squareMedium
+            ? data.images.squareMedium
+            : DEFAULT_LABEL;
+
+        setIsMain(false);
+        setIsLoading(false);
+      });
+    }
+  };
+
+  const goMainScreen = () => {
+    setIsMain(true);
   };
 
   React.useEffect(() => {
