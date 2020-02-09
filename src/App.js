@@ -34,6 +34,12 @@ const App = () => {
   const breweryLabel = React.useRef(null);
   const breweryYear = React.useRef(null);
 
+  /**
+   * Function to get the regarding screen component depending on isMain state
+   * @function getScreen
+   * @returns {JSX component}
+   */
+
   const getScreen = () =>
     isMain ? (
       <MainScreen
@@ -55,16 +61,38 @@ const App = () => {
       />
     );
 
+  /**
+   * Function covered by useCallback method to call a service
+   * with an specific Id which retrieves a beer data used to set
+   * beer and brewery data as references
+   * Besides, it sets isLoading state as false
+   * @function getBeerById
+   * @param {id} string
+   */
+
   const getBeerById = React.useCallback(
     id => {
       getBeerByIdService(id).then(response => {
         const { data } = response;
 
         beerName.current = data.name;
+
+        /** I have realized some times description is not retrieved by service, so first
+        I check realized if it exists. If exits I assing to the reference this value ,
+        if not I assign to the reference a string value  */
         beerDescription.current =
           (data.style && data.style.description) || "Description not found";
+
+        /** I check if label is retrieved by service, If exits I assing to the reference this value,
+        if not I assign to the reference a CONSTANT value with a src default image*/
+
         beerLabel.current = data.labels ? data.labels.medium : DEFAULT_LABEL;
+
+        /** I check if breweries data retrieved exits to assign a boolean reference*/
+
         hasBrewery.current = !!data.breweries.length;
+        /** I check if breweries data retrieved exits to assign an string or a null value as id*/
+
         breweryId.current = data.breweries.length ? data.breweries[0].id : null;
 
         const [breweryData] = data.breweries;
@@ -78,16 +106,12 @@ const App = () => {
     [beerName, beerDescription]
   );
 
-  const getRandomBeer = React.useCallback(() => {
-    setIsLoading(true);
-    getRandomBeerService().then(response => {
-      const {
-        data: { id }
-      } = response;
-
-      getBeerById(id);
-    });
-  }, [getBeerById]);
+  /**
+   * Function to call a service which retrieves a beer data used to set
+   * brewery data as references
+   * Besides, it sets isLoading and isMain state as false
+   * @function goBreweryScreen
+   */
 
   const goBreweryScreen = () => {
     setIsLoading(true);
@@ -95,8 +119,15 @@ const App = () => {
       getBreweryByIdService(breweryId.current).then(response => {
         const { data } = response;
 
+        /** I have realized some times description is not retrieved by service, so first
+        I check realized if it exists. If exits I assing to the reference this value ,
+        if not I assign to the reference a string value  */
         breweryDescription.current =
           data.description || "Description not found";
+
+        /** I check if label is retrieved by service, If exits I assing to the reference this value,
+        if not I assign to the reference a CONSTANT value with a src default image*/
+
         breweryLabel.current =
           data.images && data.images.squareMedium
             ? data.images.squareMedium
@@ -111,6 +142,24 @@ const App = () => {
   const goMainScreen = () => {
     setIsMain(true);
   };
+
+  /**
+   * Function covered by useCallback method to call a service
+   * which retrieves a random beer data used to call getBeerById
+   * function with the id retrieved
+   * @function getRandomBeer
+   */
+
+  const getRandomBeer = React.useCallback(() => {
+    setIsLoading(true);
+    getRandomBeerService().then(response => {
+      const {
+        data: { id }
+      } = response;
+
+      getBeerById(id);
+    });
+  }, [getBeerById]);
 
   React.useEffect(() => {
     getRandomBeer();
